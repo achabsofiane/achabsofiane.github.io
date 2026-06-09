@@ -4,3 +4,11 @@
 # Outils de prévisualisation locale (inutiles en ligne)
 .claude/
 serve.py
+
+# Maquettes Figma de travail (non utilisées par le site)
+assets/img/*-Desktop.png
+assets/img/*-Mobile.png
+assets/img/*-Tablet.png
+assets/img/button.png
+assets/img/tag.png
+assets/img/Other/
