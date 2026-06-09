@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sofiane Achab — Senior Product Manager & UX Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Sometype+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg1: #eeeeee;
+      --bg2: #d7e9d6;
+      --bg3: #496D4A;
+      --text1: #1e391f;
+      --text1-accent: #182e19;
+      --font-serif: 'Cormorant', Georgia, serif;
+      --font-mono: 'Sometype Mono', monospace;
+      --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg1);
+      color: var(--text1);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 20px 48px;
+      background: var(--bg1);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: rgba(30,57,31,0.12); }
+
+    nav .brand {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      text-decoration: none;
+      margin-right: auto;
+    }
+    nav a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      text-decoration: none;
+      opacity: 1;
+      transition: opacity 0.2s;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--text1);
+      transition: width 0.25s ease;
+    }
+    nav a:hover { opacity: 1; }
+    nav a:hover::after { width: 100%; }
+    nav a.active { opacity: 1; }
+    nav a.active::after { width: 100%; }
+
+    /* ── LANGUAGE SWITCH ── */
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 4px;
+    }
+    .lang-opt {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0.5;
+      position: relative;
+      transition: opacity 0.2s;
+    }
+    .lang-opt::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--text1);
+      transition: width 0.25s ease;
+    }
+    .lang-opt:hover { opacity: 1; }
+    .lang-opt.active { opacity: 1; }
+    .lang-opt.active::after { width: 100%; }
+    .lang-sep {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text1);
+      opacity: 0.3;
+    }
+
+    /* ── LAYOUT WRAPPER ── */
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── HOME LAYOUT (unified sticky grid) ── */
+    .home-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      padding-top: 120px;
+      padding-bottom: 120px;
+    }
+
+    .home-left {
+      position: sticky;
+      top: 120px;
+      align-self: start;
+    }
+
+    .home-right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-photo {
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      border-radius: 5px;
+    }
+
+    .hero-tagline {
+      margin-top: 48px;
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 19px;
+      line-height: 1.7;
+      letter-spacing: -0.04em;
+      max-width: 340px;
+    }
+
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(36px, 3.9vw, 50px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--text1);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .section-intro-text {
+      padding: 120px 0 64px;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(28px, 2.8vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    /* ── PROJECTS LIST ── */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 40px;
+    }
+
+    .project-item {
+      border-top: 1px solid rgba(30,57,31,0.2);
+      padding: 24px 0 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: start;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      cursor: pointer;
+    }
+    .project-item.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .project-name {
+      transition: transform 0.3s ease;
+    }
+    .project-item:hover .project-name {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-thickness: 1px;
+      transform: translateX(4px);
+    }
+    .project-item:hover .project-cta {
+      background: var(--text1);
+      color: var(--bg1);
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      grid-column: 1 / -1;
+    }
+
+    .project-date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+      opacity: 0.5;
+    }
+
+    .project-category {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0;
+      color: var(--text1);
+      background: var(--bg2);
+    }
+
+    .project-name {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(28px, 2.4vw, 40px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      grid-column: 1 / -1;
+      margin-top: 6px;
+    }
+
+    .project-cta {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0;
+      color: var(--text1);
+      text-decoration: none;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      background: var(--bg2);
+      transition: background 0.22s ease, color 0.22s ease;
+      cursor: pointer;
+      pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .project-cta::after {
+      content: ' →';
+      display: inline-block;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-width 0.22s ease, opacity 0.22s ease, margin-left 0.22s ease;
+      margin-left: 0;
+    }
+    .project-item:hover .project-cta {
+      background: var(--text1);
+      color: var(--bg1);
+    }
+    .project-item:hover .project-cta::after {
+      max-width: 24px;
+      opacity: 1;
+      margin-left: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(30,57,31,0.15);
+      padding: 40px 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .footer-info {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: -0.02em;
+      line-height: 1.8;
+      color: var(--text1);
+    }
+
+    .footer-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── ABOUT PAGE ── */
+    #page-about { display: none; animation: fadeUp 0.5s ease both; }
+    #page-about.active { display: block; }
+    #page-home { display: block; }
+    #page-home.hidden { display: none; }
+
+    /* Contact + button in left column: tablet only */
+    .about-left-tablet { display: none; }
+
+    .about-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      padding: 80px 0 64px;
+      border-top: 1px solid rgba(30,57,31,0.15);
+      margin-top: 80px;
+    }
+
+    .about-heading {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(32px, 3vw, 44px);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .about-contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      padding-top: 4px;
+    }
+    .about-contact-details a {
+      color: var(--text1);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .about-contact-details span { color: var(--text1); }
+
+    .about-block {
+      padding-bottom: 48px;
+      border-top: 1px solid rgba(30,57,31,0.15);
+      padding-top: 64px;
+    }
+    .about-block .about-heading { margin-bottom: 24px; }
+
+    .about-body {
+      font-size: 16px;
+      line-height: 1.75;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      color: var(--text1);
+    }
+
+    .about-services { padding-bottom: 80px; }
+
+    .service-item {
+      margin-bottom: 40px;
+    }
+
+    .service-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0;
+      color: var(--text1);
+      background: var(--bg2);
+      margin-bottom: 12px;
+    }
+
+    .service-item .about-body { margin-top: 0; }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0;
+      color: var(--text1);
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 6px;
+      background: var(--bg2);
+      transition: background 0.22s ease, color 0.22s ease;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .contact-btn::after {
+      content: ' →';
+      display: inline-block;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-width 0.22s ease, opacity 0.22s ease, margin-left 0.22s ease;
+      margin-left: 0;
+    }
+    .contact-btn:hover {
+      background: var(--text1);
+      color: var(--bg1);
+    }
+    .contact-btn:hover::after {
+      max-width: 24px;
+      opacity: 1;
+      margin-left: 4px;
+    }
+
+    /* ── PROJECT PAGE ── */
+    .project-page {
+      display: none;
+      padding-top: 120px;
+      padding-bottom: 120px;
+    }
+    .project-page.active { display: block; }
+
+    .project-page-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 80px;
+    }
+
+    .project-page-title {
+      grid-column: 2;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(32px, 3.2vw, 46px);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+    }
+
+    .project-page-intro {
+      grid-column: 2;
+      margin-top: 32px;
+      font-size: 19px;
+      line-height: 1.7;
+      letter-spacing: -0.04em;
+      font-weight: 400;
+      max-width: 540px;
+    }
+
+    .project-logo-large {
+      grid-column: 1 / -1;
+      margin: 48px 0;
+      border-bottom: 1px solid rgba(30,57,31,0.15);
+      padding-bottom: 48px;
+    }
+
+    .project-logo-img {
+      height: clamp(48px, 7vw, 96px);
+      width: auto;
+      display: block;
+      filter: brightness(0) saturate(100%) invert(16%) sepia(28%) saturate(500%) hue-rotate(89deg);
+    }
+
+    .confidential-note {
+      font-family: var(--font-serif);
+      font-style: normal;
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 38px);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--text1);
+      text-align: left;
+      padding: 60px 0;
+    }
+
+    .project-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 64px;
+    }
+
+    .project-section-title {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 38px);
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .achievement-heading {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 38px);
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      color: var(--bg2);
+    }
+
+    .project-caption {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+
+    .project-body {
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .achievement-box {
+      background: var(--bg3);
+      color: var(--bg1);
+      padding: 32px 48px 32px 32px;
+      margin-top: 48px;
+      margin-right: -48px;
+    }
+
+    .achievement-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0;
+      color: var(--text1);
+      background: var(--bg2);
+      margin-bottom: 8px;
+    }
+
+    .achievement-box h3 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      color: var(--bg2);
+    }
+
+    .achievement-item {
+      margin-bottom: 40px;
+    }
+    .achievement-item .caption {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: -0.02em;
+      color: var(--bg2);
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+    .achievement-item p {
+      font-size: 16px;
+      line-height: 1.75;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      color: var(--bg1);
+    }
+
+    /* ── PROJECT SCREENSHOTS ── */
+    .project-screenshot-full {
+      margin: 48px 0;
+      border: 1px solid rgba(30,57,31,0.12);
+    }
+    .project-screenshot-img {
+      width: 100%;
+      display: block;
+    }
+
+    .osme-section-label {
+      font-family: var(--font-serif);
+      font-style: normal;
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 38px);
+      letter-spacing: -0.03em;
+      text-align: center;
+      color: var(--text1);
+      padding: 64px 0 32px;
+    }
+
+    .osme-caption {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--text1);
+      text-align: center;
+      padding: 24px 0 64px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .project-screenshot-full.reduced {
+      border: none;
+      max-width: 65%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .osme-know-more {
+      margin-top: 80px;
+      border-top: 1px solid rgba(30,57,31,0.15);
+      padding-top: 64px;
+      padding-bottom: 80px;
+    }
+
+    .osme-know-title {
+      margin-bottom: 48px;
+    }
+
+    /* Vision | image | solutions — image sits between the two text blocks */
+    .osme-grid-vision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 48px;
+      row-gap: 24px;
+    }
+    .osme-grid-vision .ov-vision { grid-column: 1; grid-row: 1; }
+    .osme-grid-vision .ov-solutions { grid-column: 1; grid-row: 2; }
+    .osme-grid-vision .ov-image { grid-column: 2; grid-row: 1 / 3; align-self: center; }
+
+    .partoo-epics-heading {
+      border-top: 1px solid rgba(30,57,31,0.15);
+      padding: 100px 50px 48px;
+    }
+
+    .partoo-boxes {
+      display: flex;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 20px 50px 100px;
+    }
+
+    .partoo-box {
+      position: relative;
+      flex: 1;
+      background: var(--bg1);
+      border: 1px solid var(--text1);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .partoo-box::after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: -10px;
+      bottom: -10px;
+      border: 1px solid var(--bg3);
+      background: transparent;
+      z-index: -1;
+    }
+
+    .partoo-box .service-tag {
+      margin-bottom: 4px;
+    }
+
+    .partoo-box .about-body {
+      font-size: 15px;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .other-section {
+      margin-bottom: 80px;
+    }
+    .other-speaker-logo {
+      height: 56px;
+      width: auto;
+      display: block;
+      filter: brightness(0) saturate(100%) invert(19%) sepia(25%) saturate(600%) hue-rotate(88deg) brightness(0.85);
+    }
+    /* Long tags: hug the text on each line instead of forming a box */
+    .other-speaker-cols .service-tag,
+    .some-project-item .service-tag {
+      display: inline;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+      line-height: 1.7;
+    }
+    .other-speaker-cols .service-item > .service-tag + p { margin-top: 14px; }
+    .wallglass-img {
+      border-radius: 4px;
+    }
+    /* Product Management — consistent spacing between Company / Context / Missions */
+    .livinfrance-cols .service-item {
+      margin-bottom: 40px;
+    }
+    .livinfrance-cols .service-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .leadscore-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 64px;
+      align-items: start;
+      padding-bottom: 80px;
+    }
+    .leadscore-screenshots {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .leadscore-texts {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .partoo-intro-texts {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .partoo-overhaul {
+      border-top: 1px solid rgba(30,57,31,0.15);
+      padding-top: 64px;
+      padding-bottom: 40px;
+    }
+    .overhaul-img-mobile { display: none; }
+
+    .partoo-list {
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      padding-left: 18px;
+    }
+    .partoo-list li { margin-bottom: 14px; }
+
+    /* ── SOME PROJECTS ── */
+    .project-some-projects {
+      margin-top: 80px;
+      border-top: 1px solid rgba(30,57,31,0.15);
+      padding-top: 64px;
+    }
+
+    .project-some-projects .project-section-title {
+      margin-bottom: 32px;
+    }
+
+    .some-projects-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .some-project-item {
+      padding: 16px 0;
+    }
+    .some-project-item .service-tag + .about-body { margin-top: 12px; }
+
+    /* project nav bottom */
+    .project-nav-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid rgba(30,57,31,0.15);
+      margin-top: 80px;
+    }
+
+    .project-nav-item {
+      padding: 40px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .project-nav-item.nav-next {
+      align-items: flex-end;
+      text-align: right;
+      padding-left: 32px;
+    }
+
+    .nav-logo-img {
+      height: 48px;
+      width: auto;
+      display: block;
+      filter: brightness(0) saturate(100%) invert(19%) sepia(25%) saturate(600%) hue-rotate(88deg) brightness(0.85);
+    }
+    .nav-logo-img--color {
+      filter: none;
+    }
+
+    .nav-company-name {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 38px);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .nav-dates {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: -0.01em;
+      opacity: 0.55;
+    }
+
+    .nav-role {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 38px);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text1);
+    }
+
+    .project-nav-item.nav-next .nav-role {
+      text-align: right;
+    }
+
+    .project-nav-item .project-cta {
+      margin-top: 4px;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .project-nav-item .project-cta:hover {
+      background: var(--text1);
+      color: var(--bg1);
+    }
+    .project-nav-item .project-cta:hover::after {
+      max-width: 24px;
+      opacity: 1;
+      margin-left: 4px;
+    }
+
+    /* ── ABOUT LAYOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .about-photo {
+      width: 380px;
+      height: 480px;
+      background: var(--bg2);
+    }
+
+    .about-right {
+      padding-left: 0;
+    }
+
+    .about-section {
+      margin-bottom: 56px;
+    }
+
+    .about-section h2 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 40px;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .service-item {
+      margin-bottom: 24px;
+    }
+    .service-item .caption {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.02em;
+      color: var(--text1);
+      opacity: 0.55;
+      margin-bottom: 6px;
+    }
+    .service-item p {
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+    .contact-grid h2 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 40px;
+      letter-spacing: -0.03em;
+    }
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: -0.02em;
+      padding-top: 6px;
+    }
+    .contact-details a {
+      color: var(--text1);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* Section reveal on scroll (project pages) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ════════ RESPONSIVE — TABLET (≤1024px) ════════ */
+    @media (max-width: 1024px) {
+      nav { padding: 18px 40px; }
+      .page { padding-left: 40px; padding-right: 40px; }
+
+      /* HOME keeps the desktop two-column sticky layout on tablet */
+
+      /* ── ABOUT: keep 2-col sticky, move Contact + button into left column ── */
+      .about-left-tablet { display: block; padding-top: 48px; }
+      .about-contact-desktop { display: none; }
+      .about-cta-desktop { display: none; }
+      .about-left-tablet .about-contact {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 0;
+        padding: 0;
+        border-top: none;
+      }
+      #page-about .about-block {
+        padding-top: 56px;
+        margin-top: 56px;
+        border-top: 1px solid rgba(30,57,31,0.15);
+      }
+      #page-about .about-block .about-heading { margin-bottom: 20px; }
+
+      /* ── PROJECT PAGES ── */
+      .project-page-header { grid-template-columns: 1fr; }
+      .project-page-title { grid-column: 1; }
+      .project-page-intro { grid-column: 1; max-width: 100%; }
+      .project-two-col { grid-template-columns: 1fr !important; }
+      .project-nav-bottom { grid-template-columns: 1fr 1fr; }
+
+      /* Some achievements box: keep desktop padding, just avoid 8px overflow */
+      .achievement-box { margin-right: -40px; }
+
+      /* Osme landing/home screenshots: full-width on tablet */
+      .project-screenshot-full.reduced { max-width: 100%; }
+
+      /* Osme "To know more": vision | image | solutions stays 2 columns;
+         concept-store image full-width then marketplace | concept-store side by side */
+      .osme-grid-vision { column-gap: 32px; }
+      .osme-grid-store { grid-template-columns: 1fr !important; }
+      .osme-store-texts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      /* Partoo intro: screenshot full-width, presentation text in 2 columns */
+      .partoo-intro-texts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+
+      /* Partoo: stack the 3 EPIC boxes — all same width (longest content), not full width */
+      .partoo-epics-heading { padding-left: 0; padding-right: 0; }
+      .partoo-boxes {
+        display: grid;
+        grid-template-columns: max-content;
+        justify-content: center;
+        padding: 20px 0 24px;
+        gap: 28px;
+      }
+
+      /* Leadscore: stack screenshots and texts into one column */
+      .leadscore-grid { grid-template-columns: 1fr; }
+
+      /* ── OTHER PROJECTS ── */
+      /* Branding: text above (Company | Mission), image below */
+      .other-branding { grid-template-columns: 1fr !important; }
+      .other-branding > div:first-child { order: 2; }
+      .other-branding-texts {
+        order: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      /* Product Management: text above (Company | Context, Missions full-width), image below */
+      .livinfrance-cols { grid-template-columns: 1fr !important; }
+      .livinfrance-cols > div:first-child { order: 2; }
+      .livinfrance-texts {
+        order: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px 32px;
+      }
+      .livinfrance-texts .service-item { margin-bottom: 0 !important; }
+      .livinfrance-texts .service-item:nth-child(3) { grid-column: 1 / -1; }
+      /* Speaker: keep 2 columns (Sciences Po/Lille | Digital Campus) */
+      .other-speaker-cols { grid-template-columns: 1fr 1fr !important; }
+
+      /* Leadscore intro: screenshot full-width, company text in right column only */
+      .leadscore-intro {
+        grid-template-columns: 1fr 1fr !important;
+        row-gap: 48px;
+      }
+      .leadscore-intro > div:first-child { grid-column: 1 / -1; }
+      .leadscore-intro > div:last-child { grid-column: 2; }
+    }
+
+    /* ════════ RESPONSIVE — MOBILE (≤600px) ════════ */
+    @media (max-width: 600px) {
+      nav { padding: 16px 24px; gap: 20px; }
+      .page { padding-left: 24px; padding-right: 24px; }
+
+      /* ── HOME: stack everything ── */
+      #page-home .home-layout {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 88px;
+      }
+      #page-home .home-left,
+      #page-home .home-right { display: contents; }
+      #page-home .hero-headline { order: 1; max-width: 100%; margin-bottom: 40px; }
+      #page-home .hero-photo { order: 2; max-width: 100%; }
+      #page-home .hero-tagline { order: 3; text-align: left; max-width: 100%; margin: 24px 0 0; }
+      #page-home .section-intro-text { order: 4; padding: 56px 0 32px; }
+      #page-home .projects-list { order: 5; }
+
+      /* ── ABOUT: stack (headline, photo, Contact, About, services, button) ── */
+      #page-about .home-layout {
+        display: flex;
+        flex-direction: column;
+        padding-top: 88px;
+      }
+      #page-about .home-left,
+      #page-about .home-right { display: contents; }
+      .about-left-tablet { display: none; }
+      .about-contact-desktop { display: grid; }
+      .about-cta-desktop { display: block; }
+      #page-about .hero-headline { order: 1; max-width: 100%; margin-bottom: 40px; }
+      #page-about .hero-photo { order: 2; max-width: 100%; margin-bottom: 0; }
+      #page-about .about-contact-desktop {
+        order: 3;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 48px;
+        padding: 48px 0 0;
+        border-top: 1px solid rgba(30,57,31,0.15);
+      }
+      #page-about .about-block { order: 4; padding-top: 48px; margin-top: 48px; }
+      #page-about .about-services { order: 5; }
+      #page-about .about-cta-desktop { order: 6; padding-bottom: 64px; }
+
+      /* ── PROJECT PAGES: everything single column ── */
+      .achievement-box { margin-right: -24px; padding: 28px 24px; }
+      .partoo-intro-texts { grid-template-columns: 1fr !important; gap: 24px; }
+      .other-branding-texts { grid-template-columns: 1fr !important; gap: 0; }
+      .other-branding-texts .service-item { margin-bottom: 40px; }
+      .other-branding-texts .service-item:last-child { margin-bottom: 0; }
+      .livinfrance-texts { grid-template-columns: 1fr !important; }
+      .livinfrance-texts .service-item { margin-bottom: 40px !important; }
+      .other-speaker-cols { grid-template-columns: 1fr !important; }
+      .other-speaker-cols > div:first-child { margin-bottom: 40px; }
+      /* Osme vision/image/solutions: single column, image between the two texts */
+      .osme-grid-vision { grid-template-columns: 1fr; }
+      .osme-grid-vision .ov-vision,
+      .osme-grid-vision .ov-image,
+      .osme-grid-vision .ov-solutions { grid-column: 1; grid-row: auto; }
+      .osme-store-texts { grid-template-columns: 1fr !important; gap: 0; }
+      .osme-store-texts .service-item { margin-bottom: 32px; }
+      .leadscore-intro { grid-template-columns: 1fr !important; }
+      .leadscore-intro > div:last-child { grid-column: 1 !important; }
+
+      /* nav between projects: stack */
+      .project-nav-bottom { grid-template-columns: 1fr; gap: 40px; }
+      .project-nav-item.nav-next {
+        align-items: flex-start;
+        text-align: left;
+        padding-left: 0;
+        border-top: 1px solid rgba(30,57,31,0.15);
+        padding-top: 40px;
+      }
+      .project-nav-item.nav-next .nav-role { text-align: left; }
+      /* single-item nav (e.g. L'Oréal): drop the empty cell and its duplicate divider */
+      .project-nav-bottom > div:empty { display: none; }
+      .project-nav-bottom > div:empty + .project-nav-item.nav-next {
+        border-top: none;
+        padding-top: 40px;
+      }
+
+      /* Partoo: first screenshot full-bleed (bigger) */
+      .partoo-intro > div:first-child {
+        margin-left: -24px;
+        margin-right: -24px;
+      }
+      .partoo-intro > div:first-child img { border-radius: 0 !important; }
+
+      /* Other — Speaker: tighter gap between the two stacked blocks */
+      .other-speaker-cols > div:first-child { margin-bottom: 40px; }
+
+      /* Partoo overhaul: use the mobile-optimised image */
+      .overhaul-img-desktop { display: none; }
+      .overhaul-img-mobile { display: block; }
+
+      /* tighten headings a touch */
+      .project-page-title { font-size: clamp(28px, 8vw, 34px); }
+      .hero-headline { font-size: clamp(28px, 8vw, 34px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#" class="brand" onclick="showPage('home'); return false;">Sofiane Achab</a>
+    <a href="#" id="nav-home" class="active" onclick="showPage('home'); return false;" data-i18n="nav.home">Home</a>
+    <a href="#" id="nav-about" onclick="showPage('about'); return false;" data-i18n="nav.about">About</a>
+    <span class="lang-switch" aria-label="Language">
+      <button type="button" class="lang-opt active" data-lang="en" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">|</span>
+      <button type="button" class="lang-opt" data-lang="fr" onclick="setLang('fr')">FR</button>
+    </span>
+  </nav>
+
+  <!-- ══════════════ HOME ══════════════ -->
+  <div id="page-home">
+    <div class="page">
+
+      <!-- HOME LAYOUT -->
+      <div class="home-layout">
+
+        <div class="home-left">
+          <img src="assets/img/photo-sofiane.png" class="hero-photo" alt="Sofiane Achab">
+          <p class="hero-tagline" data-i18n="home.tagline">
+            From detecting user needs to designing solutions and driving technical teams — I turn complex problems into coherent, impactful digital products or process.
+          </p>
+        </div>
+
+        <div class="home-right">
+          <h1 class="hero-headline" data-i18n="home.headline">
+            Hello, I'm Sofiane — Senior Product Manager & UX Designer helping companies navigate digital transformation through product strategy, design and agile methodology.
+          </h1>
+
+          <p class="section-intro-text" data-i18n="home.intro">
+            Here's a selection of my projects and work experiences.
+          </p>
+
+          <div class="projects-list">
+
+          <div class="project-item" data-project="loreal" onclick="showProject('loreal')">
+            <div class="project-meta">
+              <span class="project-date">2023–2025</span>
+              <span class="project-category" data-i18n="cat.loreal">UX/UI Design &amp; Product Management</span>
+            </div>
+            <h2 class="project-name">L'Oréal</h2>
+            <span class="project-cta" data-i18n="btn.discover">Discover</span>
+          </div>
+
+          <div class="project-item" data-project="osme" onclick="showProject('osme')">
+            <div class="project-meta">
+              <span class="project-date">2021–2025</span>
+              <span class="project-category" data-i18n="cat.osme">Entrepreneurship</span>
+            </div>
+            <h2 class="project-name">Osme</h2>
+            <span class="project-cta" data-i18n="btn.discover">Discover</span>
+          </div>
+
+          <div class="project-item" data-project="partoo" onclick="showProject('partoo')">
+            <div class="project-meta">
+              <span class="project-date">2019–2022</span>
+              <span class="project-category" data-i18n="cat.partoo">Product Management</span>
+            </div>
+            <h2 class="project-name">Partoo</h2>
+            <span class="project-cta" data-i18n="btn.discover">Discover</span>
+          </div>
+
+          <div class="project-item" data-project="leadscore" onclick="showProject('leadscore')">
+            <div class="project-meta">
+              <span class="project-date">2018</span>
+              <span class="project-category" data-i18n="cat.leadscore">Product Design</span>
+            </div>
+            <h2 class="project-name">Leadscore.io</h2>
+            <span class="project-cta" data-i18n="btn.discover">Discover</span>
+          </div>
+
+          <div class="project-item" data-project="wallglass" onclick="showProject('other')">
+            <div class="project-meta">
+              <span class="project-date">2022</span>
+              <span class="project-category" data-i18n="cat.wallglass">Branding &amp; UX/UI Design</span>
+            </div>
+            <h2 class="project-name">Wallglass</h2>
+            <span class="project-cta" data-i18n="btn.discover">Discover</span>
+          </div>
+
+          <div class="project-item" data-project="livingfrance" onclick="showProject('other')">
+            <div class="project-meta">
+              <span class="project-date">2017</span>
+              <span class="project-category" data-i18n="cat.livinfrance">Product Management</span>
+            </div>
+            <h2 class="project-name">LivinFrance</h2>
+            <span class="project-cta" data-i18n="btn.discover">Discover</span>
+          </div>
+
+          <div class="project-item" data-project="other" onclick="showProject('other')">
+            <div class="project-meta">
+              <span class="project-date">2016–2026</span>
+              <span class="project-category" data-i18n="cat.other">Product, Lecturer, UX Research</span>
+            </div>
+            <h2 class="project-name" data-i18n="proj.other.name">Other projects…</h2>
+            <span class="project-cta" data-i18n="btn.discover">Discover</span>
+          </div>
+
+        </div><!-- /.projects-list -->
+        </div><!-- /.home-right -->
+      </div><!-- /.home-layout -->
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="footer-info">
+          Sofiane Achab<br>
+          Copyright © 2026<br>
+          sofiane.achab@gmail.com<br>
+          (33) 6 83 82 72 22
+        </div>
+        <a href="https://www.linkedin.com/in/sofianeachab/" class="footer-link" target="_blank">LinkedIn ↗</a>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ══════════════ ABOUT ══════════════ -->
+  <div id="page-about" class="page">
+    <div class="home-layout">
+
+      <div class="home-left">
+        <img src="assets/img/photo-sofiane.png" class="hero-photo" alt="Sofiane Achab">
+
+        <!-- Tablet-only: Contact + button live in the sticky left column -->
+        <div class="about-left-tablet">
+          <div class="about-contact">
+            <h2 class="about-heading">Contact</h2>
+            <div class="about-contact-details">
+              <a href="mailto:sofiane.achab@gmail.com">sofiane.achab@gmail.com</a>
+              <span>33 (6) 83 82 72 22</span>
+              <a href="https://www.linkedin.com/in/sofianeachab/" target="_blank">LinkedIn ↗</a>
+            </div>
+          </div>
+          <div class="about-cta-wrap" style="padding-top: 32px;">
+            <a href="mailto:sofiane.achab@gmail.com" class="contact-btn" data-i18n="btn.contact">Contact me</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-right">
+
+        <h1 class="hero-headline" data-i18n="home.headline">
+          Hello, I'm Sofiane — Senior Product Manager & UX Designer helping companies navigate digital transformation through product strategy, design and agile methodology.
+        </h1>
+
+        <div class="about-contact about-contact-desktop">
+          <h2 class="about-heading">Contact</h2>
+          <div class="about-contact-details">
+            <a href="mailto:sofiane.achab@gmail.com">sofiane.achab@gmail.com</a>
+            <span>33 (6) 83 82 72 22</span>
+            <a href="https://www.linkedin.com/in/sofianeachab/" target="_blank">LinkedIn ↗</a>
+          </div>
+        </div>
+
+        <div class="about-block">
+          <h2 class="about-heading" data-i18n="about.heading">About</h2>
+          <p class="about-body" data-i18n="about.body">
+            From detecting user needs to designing solutions and driving technical teams — I bridge strategy, design and execution to build digital products that create real value.
+          </p>
+        </div>
+
+        <div class="about-services">
+          <div class="service-item">
+            <span class="service-tag">Product Management</span>
+            <p class="about-body" data-i18n="about.svc.pm">Translating user needs into clear product decisions — defining solutions, aligning stakeholders, and leading technical teams from discovery through delivery.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-tag">UX.UI Design</span>
+            <p class="about-body" data-i18n="about.svc.ux">Designing intuitive, user-centred experiences that balance real user needs with business objectives — from research and analysis to wireframes and final product.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-tag" data-i18n="tag.entrepreneurship">Entrepreneurship</span>
+            <p class="about-body" data-i18n="about.svc.ent">End-to-end support for intra- and entrepreneurial projects — from need validation and vision definition to MVP scoping, branding and landing page creation.</p>
+          </div>
+        </div>
+
+        <div class="about-cta-wrap about-cta-desktop" style="padding-bottom: 80px;">
+          <a href="mailto:sofiane.achab@gmail.com" class="contact-btn" data-i18n="btn.contact">
+            Contact me
+          </a>
+        </div>
+
+      </div><!-- /.home-right -->
+    </div><!-- /.home-layout -->
+
+    <footer>
+      <div class="footer-info">
+        Sofiane Achab<br>
+        Copyright © 2026<br>
+        sofiane.achab@gmail.com<br>
+        (33) 6 83 82 72 22
+      </div>
+      <a href="https://www.linkedin.com/in/sofianeachab/" class="footer-link" target="_blank">LinkedIn ↗</a>
+    </footer>
+
+  </div>
+
+  <!-- ══════════════ PROJECT: L'ORÉAL ══════════════ -->
+  <div id="project-loreal" class="project-page page">
+
+    <div class="project-page-header">
+      <div></div>
+      <div>
+        <h1 class="project-page-title" data-i18n="loreal.title">L'Oréal as Senior UX.UI Designer &amp; Product Manager</h1>
+        <p class="project-page-intro" data-i18n="loreal.intro">
+          For 2 years at L'Oréal Research &amp; Innovation (R&amp;I), I led end-to-end digital transformation projects across laboratories — from user research and product design to cross-team alignment — while establishing a shared UX &amp; Agile methodology now adopted across the organization.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-logo-large">
+      <img src="assets/img/loreal-logo.png" alt="L'Oréal" class="project-logo-img">
+    </div>
+
+    <div class="project-page-header" style="margin-bottom: 0;">
+      <div></div>
+      <h2 class="confidential-note" data-i18n="loreal.confidential">
+        As this project is covered by a confidentiality agreement, I'm unable to display any screenshots or visuals — feel free to reach out if you'd like to discuss it further.
+      </h2>
+    </div>
+
+    <div class="project-two-col">
+      <div>
+        <h2 class="project-section-title" data-i18n="loreal.resp.title">Responsibilities</h2>
+
+        <div class="service-item">
+          <span class="service-tag" data-i18n="loreal.resp.1.t">End-to-end UX Framing</span>
+          <p class="about-body" data-i18n="loreal.resp.1.d">Led projects from problem definition and user research through to wireframing, prototyping and user testing.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-tag" data-i18n="loreal.resp.2.t">Methodology design</span>
+          <p class="about-body" data-i18n="loreal.resp.2.d">Established a common UX &amp; Agile framework adopted by all Research &amp; Innovation teams as the standard way of working.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-tag" data-i18n="loreal.resp.3.t">User-centred strategy</span>
+          <p class="about-body" data-i18n="loreal.resp.3.d">In an organisation where direction was largely top-down, I advocated for and successfully embedded a "Problem → Solution" approach — introducing user research tools and field studies to shift decision-making toward real user needs and pain points.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-tag" data-i18n="loreal.resp.4.t">Product management</span>
+          <p class="about-body" data-i18n="loreal.resp.4.d">Acted as both UX Designer and Product Manager, driving digital transformation initiatives across R&amp;I laboratories.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-tag" data-i18n="loreal.resp.5.t">Stakeholder alignment</span>
+          <p class="about-body" data-i18n="loreal.resp.5.d">Coordinated cross-functional teams including Product Owners, architects, product leads and lab users around a shared product vision.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="achievement-box">
+          <h2 class="achievement-heading" data-i18n="loreal.ach.title">Some achievements</h2>
+          <div class="achievement-item">
+            <span class="achievement-tag" data-i18n="loreal.ach.1.t">UX &amp; Agile Framing Process</span>
+            <p data-i18n="loreal.ach.1.d">Designed and deployed a shared methodology across both UX and Agile chapters, built around a "Problem → Solution" philosophy. Now adopted organisation-wide and used as a foundation for all R&amp;I projects.</p>
+          </div>
+          <div class="achievement-item">
+            <span class="achievement-tag" data-i18n="loreal.ach.2.t">Business Processes As IS</span>
+            <p data-i18n="loreal.ach.2.d">Mapped the end-to-end business processes of all R&amp;I laboratories in under 2 months, creating a shared reference used by multiple teams during their exploration phases.</p>
+          </div>
+          <div class="achievement-item">
+            <span class="achievement-tag" data-i18n="loreal.ach.3.t">UX Exploration Foundation</span>
+            <p data-i18n="loreal.ach.3.d">During my first months at L'Oréal, I led an end-to-end UX exploration on a pilot laboratory, which became the foundation for advocating a user-centred strategy across the entire R&amp;I division.</p>
+          </div>
+          <div class="achievement-item">
+            <span class="achievement-tag" data-i18n="loreal.ach.4.t">OKR &amp; Complexity Matrix</span>
+            <p data-i18n="loreal.ach.4.d">Designed a framing framework to give project teams better visibility on problem knowledge and solution needs, while helping PMOs strengthen project sponsorship and enabling Product Managers to define sharper framing strategies.</p>
+          </div>
+          <div class="achievement-item">
+            <span class="achievement-tag" data-i18n="loreal.ach.5.t">Design system</span>
+            <p data-i18n="loreal.ach.5.d">Integration of a new design system (Graphic chart, icons, buttons, atomic &amp; molecular levels).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-some-projects">
+      <h2 class="project-section-title" data-i18n="loreal.sp.title">Some projects</h2>
+      <div class="some-projects-list">
+
+        <div class="some-project-item">
+          <span class="service-tag" data-i18n="loreal.sp.1.t">Traceability test tool for all L'Oréal Labs</span>
+          <p class="about-body" data-i18n="loreal.sp.1.d">Led the end-to-end design of a critical cross-laboratory tool, from UX exploration and framing through wireframes, A/B testing and prototyping, to the integration of a new design system. The tool serves as the data foundation for L'Oréal R&amp;I's broader AI strategy, while tackling one of its core UX challenges: making a highly constrained and complex user task as simple and intuitive as possible.</p>
+        </div>
+
+        <div class="some-project-item">
+          <span class="service-tag" data-i18n="loreal.sp.2.t">Monitoring tool for all L'Oréal labs with AI features</span>
+          <p class="about-body" data-i18n="loreal.sp.2.d">Took over a repeatedly deprioritised project, conducted a full audit of a chaotic existing base, then led an end-to-end reframing — from user research to prototype — navigating the complexity of data, algorithms and the diversity of lab monitoring practices.</p>
+        </div>
+
+        <div class="some-project-item">
+          <span class="service-tag" data-i18n="loreal.sp.3.t">Communication tool between labs &amp; Marketing teams</span>
+          <p class="about-body" data-i18n="loreal.sp.3.d">Bridged two distinct data entities within L'Oréal by designing a simple UX within ERP constraints, leading the process from an initial audit through user interviews to user testing campaigns.</p>
+        </div>
+
+        <div class="some-project-item">
+          <span class="service-tag" data-i18n="loreal.sp.4.t">AI tool for innovation labs</span>
+          <p class="about-body" data-i18n="loreal.sp.4.d">Supported BCG teams as a UX expert in designing the product strategy for a generative AI tool aimed at L'Oréal's advanced research laboratory teams.</p>
+        </div>
+
+        <div class="some-project-item">
+          <span class="service-tag" data-i18n="loreal.sp.5.t">Monitoring tool for a specific type of laboratory</span>
+          <p class="about-body" data-i18n="loreal.sp.5.d">Supported a highly specific laboratory in defining a simple ERP-based tool, leading the process from audit to full product strategy definition.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="project-nav-bottom">
+      <div></div>
+      <div class="project-nav-item nav-next">
+        <img src="assets/img/logo-osme.png" class="nav-logo-img" alt="Osme">
+        <div class="nav-dates">2021–2025</div>
+        <div class="nav-role" data-i18n="role.osme">Founder at Osme</div>
+        <span class="project-cta" onclick="showProject('osme')" data-i18n="btn.discover">Discover</span>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-info">
+        Sofiane Achab<br>
+        Copyright © 2026<br>
+        sofiane.achab@gmail.com<br>
+        (33) 6 83 82 72 22
+      </div>
+      <a href="https://www.linkedin.com/in/sofianeachab/" class="footer-link" target="_blank">LinkedIn ↗</a>
+    </footer>
+  </div>
+
+  <!-- ══════════════ PROJECT: OSME ══════════════ -->
+  <div id="project-osme" class="project-page page">
+
+    <div class="project-page-header">
+      <div></div>
+      <div>
+        <h1 class="project-page-title" data-i18n="osme.title">Osme as Founder</h1>
+        <p class="project-page-intro" data-i18n="osme.intro">
+          Osme offers an ethical and creative alternative in fashion by supporting emerging fashion designers in the development of their brand. This is done through a digital platform and pop-up concept stores.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-logo-large" style="border-bottom: none; padding-bottom: 0;">
+      <img src="assets/img/logo-osme.png" alt="Osme" class="project-logo-img">
+    </div>
+
+    <div class="project-screenshot-full">
+      <img src="assets/img/landing-page-screenshot-osme.png" alt="Osme landing page" class="project-screenshot-img">
+    </div>
+
+    <div class="project-page-header" style="margin-bottom: 0; padding: 80px 0 80px;">
+      <div></div>
+      <div>
+        <h2 class="project-section-title" data-i18n="osme.dev.title">Design &amp; osme.fr platform development</h2>
+        <p class="about-body" style="margin-bottom: 24px;" data-i18n="osme.dev.1">User research, creation of a concept diverging from traditional e-commerce norms to suit a specific product in the fashion industry. Prototyping, segmentation to define an MVP, and platform development.</p>
+        <p class="about-body" style="font-weight: 500;" data-i18n="osme.dev.2">The concept: applying the principles of art to fashion to emphasize the creative process and craftsmanship that lie behind a designer's piece.</p>
+      </div>
+    </div>
+
+    <div class="osme-section-label" data-i18n="osme.label.landing">The landing page</div>
+
+    <div class="project-screenshot-full reduced">
+      <img src="assets/img/landing-page-screenshot-osme-2.png" alt="Osme landing page — concept store & plateforme" class="project-screenshot-img">
+    </div>
+
+    <p class="osme-caption" data-i18n="osme.caption.landing">A phygital experience bridging the gap between the Osme platform and the concept store.</p>
+
+    <div class="osme-section-label" data-i18n="osme.label.home">The home page</div>
+
+    <div class="project-screenshot-full reduced">
+      <img src="assets/img/homepage-osme.png" alt="Osme home page" class="project-screenshot-img">
+    </div>
+
+    <p class="osme-caption" data-i18n="osme.caption.home">A fresh perspective on e-commerce.</p>
+
+    <div class="osme-know-more">
+      <h2 class="project-section-title osme-know-title" data-i18n="osme.know.title">To know more about Osme…</h2>
+
+      <div class="osme-grid-vision" style="margin-bottom: 64px;">
+        <div class="ov-vision">
+          <div class="service-item">
+            <span class="service-tag" data-i18n="osme.vision.t">The vision</span>
+            <p class="about-body" data-i18n="osme.vision.d">The price of a piece should be justified by the craftsmanship and creativity of the designer, not by the brand's reputation. A new shopping experience should be offered by encouraging the customer to engage with the story and craftsmanship behind the piece.</p>
+          </div>
+        </div>
+        <div class="ov-image">
+          <img src="assets/img/osme-comparison.png" alt="Osme product comparison" class="project-screenshot-img">
+        </div>
+        <div class="ov-solutions">
+          <div class="service-item">
+            <span class="service-tag" data-i18n="osme.solutions.t">The solutions</span>
+            <p class="about-body" data-i18n="osme.solutions.d">An e-commerce platform alone is not enough to convey the artistic sensitivity and craftsmanship of the designers.</p>
+            <p class="about-body" style="margin-top: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0;" data-i18n="osme.solutions.stats">1 digital marketplace ; 4 concept-stores ; 70+ brands</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-two-col osme-grid-store" style="align-items: center; gap: 48px;">
+        <div>
+          <img src="assets/img/osme-conceptstore.png" alt="Osme concept store" class="project-screenshot-img">
+        </div>
+        <div class="osme-store-texts">
+          <div class="service-item">
+            <span class="service-tag" data-i18n="osme.mkt.t">The marketplace</span>
+            <p class="about-body" data-i18n="osme.mkt.d">Provide a digital presence for designers, with a space that goes beyond just purchasing and an online store, but also includes a discovery area to enhance the customer experience.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-tag" data-i18n="osme.cs.t">The concept-store</span>
+            <p class="about-body" data-i18n="osme.cs.d">Create a space to exhibit designer pieces. A meeting place where consumers and designers can engage in discussions about craftsmanship and shared values.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-nav-bottom">
+      <div class="project-nav-item">
+        <img src="assets/img/loreal-logo.png" class="nav-logo-img" alt="L'Oréal">
+        <div class="nav-dates">2023–2025</div>
+        <div class="nav-role" data-i18n="role.loreal">Senior UX.UI Designer &amp; Product Manager at L'Oréal</div>
+        <span class="project-cta" onclick="showProject('loreal')" data-i18n="btn.discover">Discover</span>
+      </div>
+      <div class="project-nav-item nav-next">
+        <img src="assets/img/logo-partoo.png" class="nav-logo-img" alt="Partoo">
+        <div class="nav-dates">2019–2022</div>
+        <div class="nav-role" data-i18n="role.partoo">Senior Product Manager at Partoo</div>
+        <span class="project-cta" onclick="showProject('partoo')" data-i18n="btn.discover">Discover</span>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-info">Sofiane Achab<br>Copyright © 2026<br>sofiane.achab@gmail.com<br>(33) 6 83 82 72 22</div>
+      <a href="https://www.linkedin.com/in/sofianeachab/" class="footer-link" target="_blank">LinkedIn ↗</a>
+    </footer>
+  </div>
+
+  <!-- ══════════════ PROJECT: PARTOO ══════════════ -->
+  <div id="project-partoo" class="project-page page">
+
+    <div class="project-page-header">
+      <div></div>
+      <div>
+        <h1 class="project-page-title" data-i18n="partoo.title">Partoo as Senior Product Manager</h1>
+        <p class="project-page-intro" data-i18n="partoo.intro">
+          For over 2 years at Partoo, I owned the Review Management product end-to-end — leading 20+ projects from user research to launch, managing a cross-functional team of 9. I built and scaled a reputation management tool integrated with Google, Facebook &amp; TripAdvisor, designed for non-digital-native users such as local merchants and craftsmen. I also co-led a full UX/UI redesign of the entire platform, across both desktop and mobile.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-two-col partoo-intro" style="grid-template-columns: 3fr 2fr; align-items: center; gap: 64px; padding: 48px 0 80px; border-top: 1px solid rgba(30,57,31,0.15);">
+      <div>
+        <img src="assets/img/partoo-screenshot-1.png" alt="Partoo — Review Management" class="project-screenshot-img" style="border-radius: 4px;">
+      </div>
+      <div class="partoo-intro-texts">
+        <div>
+          <p class="about-body" data-i18n="partoo.about.1">Partoo is a scale-up providing a SaaS product to help local businesses enhance their digital presence, e-reputation, and direct interaction with customers and visitors.</p>
+        </div>
+        <div>
+          <p class="about-body" style="margin-bottom: 24px;" data-i18n="partoo.about.2">Partoo had 2 flagship products: Presence &amp; Review Management.</p>
+          <p class="about-body" data-i18n="partoo.about.3">For over 2 years, I held the position of Product Manager for Review Management, which assists clients in managing their online reputation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EPICs heading -->
+    <div class="partoo-epics-heading">
+      <h1 class="project-page-title" style="margin-bottom: 4px;" data-i18n="partoo.epics.1">20+ projets (EPICs)</h1>
+      <h1 class="project-page-title" data-i18n="partoo.epics.2">explored, specified, delivered, tested, and communicated</h1>
+    </div>
+
+    <!-- 3 boxes -->
+    <div class="partoo-boxes">
+      <div class="partoo-box">
+        <span class="service-tag">Exploration</span>
+        <p class="about-body" data-i18n="partoo.box.expl.1">User research</p>
+        <p class="about-body" data-i18n="partoo.box.expl.2">A.B testing</p>
+      </div>
+      <div class="partoo-box">
+        <span class="service-tag" data-i18n="partoo.box.mgmt.title">Management</span>
+        <p class="about-body" data-i18n="partoo.box.mgmt.1">UX strategy &amp; roadmap</p>
+        <p class="about-body" data-i18n="partoo.box.mgmt.2">Prioritization (RICE) &amp; Specification</p>
+        <p class="about-body" data-i18n="partoo.box.mgmt.3">Manage cross functionnal team (9 ppl)</p>
+      </div>
+      <div class="partoo-box">
+        <span class="service-tag" data-i18n="partoo.box.launch.title">Launch</span>
+        <p class="about-body" data-i18n="partoo.box.launch.1">Q&amp;A, test strategy</p>
+        <p class="about-body" data-i18n="partoo.box.launch.2">Product Marketing</p>
+        <p class="about-body" data-i18n="partoo.box.launch.3">Internal &amp; external communication</p>
+        <p class="about-body" data-i18n="partoo.box.launch.4">Internal training</p>
+      </div>
+    </div>
+
+    <!-- Screenshot + Features -->
+    <div class="project-two-col" style="align-items: center; gap: 64px; padding: 50px 0;">
+      <div>
+        <img src="assets/img/partoo-screenshot-2.png" alt="Partoo features" class="project-screenshot-img" style="border-radius: 4px;">
+      </div>
+      <div>
+        <h2 class="project-section-title" style="margin-bottom: 24px;" data-i18n="partoo.feat.title">Features &amp; projects highlights:</h2>
+        <ul class="partoo-list">
+          <li data-i18n="partoo.feat.1">Fetching and responding to Google, Facebook &amp; TripAdvisor reviews via API</li>
+          <li data-i18n="partoo.feat.2">Filtering by date, platform, rating, comments, keywords…</li>
+          <li data-i18n="partoo.feat.3">Seamless user experience despite the differences between Google and Facebook APIs</li>
+          <li data-i18n="partoo.feat.4">Analytics dashboard to track and monitor online reputation</li>
+          <li data-i18n="partoo.feat.5">Business Intelligence: identifying areas for improvement through review analysis</li>
+          <li data-i18n="partoo.feat.6">Smart response templates</li>
+          <li data-i18n="partoo.feat.7">Review export</li>
+          <li data-i18n="partoo.feat.8">Full redesign of the mobile design and user experience</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Complete overhaul -->
+    <div class="partoo-overhaul">
+      <h2 class="project-section-title" style="margin-bottom: 24px;" data-i18n="partoo.overhaul.title">Complete overhaul of the platform, focusing on UX and UI</h2>
+      <p class="about-body" style="max-width: 760px; margin-bottom: 48px;" data-i18n="partoo.overhaul.body">Create a new identity, rethink product branding, and enhance the user experience to unify different sections of the tool in terms of customer journey and design components. Lastly, develop the entire mobile experience, including a responsive version that doesn't currently exist.</p>
+      <img src="assets/img/partoo-screenshot-new-ux.png" alt="Partoo platform overhaul — UX/UI redesign" class="project-screenshot-img overhaul-img-desktop">
+      <img src="assets/img/partoo-screenshot-new-ux-mobile.png" alt="Partoo platform overhaul — UX/UI redesign" class="project-screenshot-img overhaul-img-mobile">
+    </div>
+
+    <div class="project-nav-bottom">
+      <div class="project-nav-item">
+        <img src="assets/img/logo-osme.png" class="nav-logo-img" alt="Osme">
+        <div class="nav-dates">2021–2025</div>
+        <div class="nav-role" data-i18n="role.osme">Founder at Osme</div>
+        <span class="project-cta" onclick="showProject('osme')" data-i18n="btn.discover">Discover</span>
+      </div>
+      <div class="project-nav-item nav-next">
+        <img src="assets/img/logo-leadscore.png" class="nav-logo-img" alt="Leadscore.io">
+        <div class="nav-dates">2018</div>
+        <div class="nav-role" data-i18n="role.leadscore">Product Manager &amp; UX Designer at Leadscore</div>
+        <span class="project-cta" onclick="showProject('leadscore')" data-i18n="btn.discover">Discover</span>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-info">Sofiane Achab<br>Copyright © 2026<br>sofiane.achab@gmail.com<br>(33) 6 83 82 72 22</div>
+      <a href="https://www.linkedin.com/in/sofianeachab/" class="footer-link" target="_blank">LinkedIn ↗</a>
+    </footer>
+  </div>
+
+  <!-- ══════════════ PROJECT: LEADSCORE ══════════════ -->
+  <div id="project-leadscore" class="project-page page">
+
+    <div class="project-page-header">
+      <div></div>
+      <div>
+        <h1 class="project-page-title" data-i18n="leadscore.title">Leadscore as Product Manager &amp; UX Designer</h1>
+        <p class="project-page-intro" data-i18n="leadscore.intro">
+          As Product Designer &amp; Product Manager at Interact, I owned the end-to-end design and delivery of Leadscore.io — a white-label CRM built for sales teams. From UX research and product design to prototyping, product ownership and go-to-market strategy, I worked closely with the CEO to shape the full product experience across marketing, sales and CRM features.
+        </p>
+      </div>
+    </div>
+
+    <!-- Screenshot 1 + company description -->
+    <div class="project-two-col leadscore-intro" style="grid-template-columns: 2fr 1fr; align-items: end; gap: 64px; padding: 48px 0 150px; border-top: 1px solid rgba(30,57,31,0.15);">
+      <div>
+        <img src="assets/img/leadscore-screenshot-1.png" alt="Leadscore dashboard" class="project-screenshot-img" style="border-radius: 4px;">
+      </div>
+      <div>
+        <p class="about-body" style="margin-bottom: 40px;" data-i18n="leadscore.company">Interact is a digital product studio building custom white-label products — CRMs, platforms and mobile apps. As part of a commercial initiative, Interact developed its own CRM, Leadscore.io, designed for sales teams.</p>
+      </div>
+    </div>
+
+    <!-- 4 sections: screenshots left, texts right -->
+    <div class="leadscore-grid">
+      <div class="leadscore-screenshots">
+        <img src="assets/img/leadscore-screenshot-2.png" alt="Leadscore UX Design" class="project-screenshot-img" style="border-radius: 4px;">
+        <img src="assets/img/leadscore-screenshot-3.png" alt="Leadscore Product Management" class="project-screenshot-img" style="border-radius: 4px;">
+        <img src="assets/img/leadscore-screenshot-4.png" alt="Leadscore Features" class="project-screenshot-img" style="border-radius: 4px;">
+      </div>
+      <div class="leadscore-texts">
+        <div>
+          <span class="service-tag" style="margin-bottom: 20px; display: inline-block;">UX.UI Design</span>
+          <ul class="partoo-list">
+            <li data-i18n="leadscore.ux.1">Full redesign of the CRM from scratch. Rethinking the entire user experience and visual design</li>
+            <li data-i18n="leadscore.ux.2">Designed two distinct interfaces and experiences: Admin view and User view</li>
+            <li data-i18n="leadscore.ux.3">Created the onboarding funnel to guide new users through their first steps on the app</li>
+          </ul>
+        </div>
+        <div>
+          <span class="service-tag" style="margin-bottom: 20px; display: inline-block;">Product Management</span>
+          <ul class="partoo-list">
+            <li data-i18n="leadscore.pm.1">Owned the product end-to-end from exploration to technical delivery</li>
+            <li data-i18n="leadscore.pm.2">Conducted UX research and competitive benchmarking to define the CRM strategy</li>
+            <li data-i18n="leadscore.pm.3">Wrote the specification, managed delivery and led user testing sessions</li>
+            <li data-i18n="leadscore.pm.4">Defined and prioritised features across 3 core modules: Marketing, Sales and CRM</li>
+          </ul>
+        </div>
+        <div>
+          <span class="service-tag" style="margin-bottom: 20px; display: inline-block;" data-i18n="leadscore.feat.tag">Features &amp; user experience</span>
+          <ul class="partoo-list">
+            <li data-i18n="leadscore.feat.1">Designed the full CRM feature set covering the entire sales workflow</li>
+            <li data-i18n="leadscore.feat.2">Built a dedicated Admin back office for configuration and management</li>
+            <li data-i18n="leadscore.feat.3">Created a seamless onboarding funnel to reduce friction for new users</li>
+            <li data-i18n="leadscore.feat.4">Ensured a consistent yet tailored experience across both Admin and User roles</li>
+          </ul>
+        </div>
+        <div>
+          <span class="service-tag" style="margin-bottom: 20px; display: inline-block;">Product Marketing</span>
+          <ul class="partoo-list">
+            <li data-i18n="leadscore.mkt.1">Defined the communication strategy to present new features and product updates</li>
+            <li data-i18n="leadscore.mkt.2">Created content to support the product launch and feature releases of Leadscore.io</li>
+            <li data-i18n="leadscore.mkt.3">Designed and prototyped the Leadscore.io landing page</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-nav-bottom">
+      <div class="project-nav-item">
+        <img src="assets/img/logo-partoo.png" class="nav-logo-img" alt="Partoo">
+        <div class="nav-dates">2019–2022</div>
+        <div class="nav-role" data-i18n="role.partoo">Senior Product Manager at Partoo</div>
+        <span class="project-cta" onclick="showProject('partoo')" data-i18n="btn.discover">Discover</span>
+      </div>
+      <div class="project-nav-item nav-next">
+        <div class="nav-company-name" data-i18n="nav.otherprojects">Other projects</div>
+        <div class="nav-dates">2016–2026</div>
+        <div class="nav-role" data-i18n="role.other">Product, Lecturer, UX Research</div>
+        <span class="project-cta" onclick="showProject('other')" data-i18n="btn.discover">Discover</span>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-info">Sofiane Achab<br>Copyright © 2026<br>sofiane.achab@gmail.com<br>(33) 6 83 82 72 22</div>
+      <a href="https://www.linkedin.com/in/sofianeachab/" class="footer-link" target="_blank">LinkedIn ↗</a>
+    </footer>
+  </div>
+
+  <!-- ══════════════ PROJECT: OTHER ══════════════ -->
+  <div id="project-other" class="project-page page">
+
+    <div class="project-page-header">
+      <div></div>
+      <div>
+        <h1 class="project-page-title" data-i18n="other.title">Other projects</h1>
+        <p class="project-page-intro" data-i18n="other.intro">
+          Beyond my main missions, I have taken on a variety of projects and roles — from supporting companies in their digital transformation and product strategy, to sharing my expertise as a guest lecturer and jury member in entrepreneurship programs at leading French universities and schools.
+        </p>
+      </div>
+    </div>
+
+    <!-- Branding, design & website development -->
+    <div class="other-section">
+      <h2 class="project-section-title" style="margin-bottom: 24px;" data-i18n="other.brand.title">Branding, design &amp; website development</h2>
+      <div class="project-two-col other-branding" style="grid-template-columns: 3fr 2fr; align-items: end; gap: 64px;">
+        <div>
+          <img src="assets/img/wallglass-screenshot.png" alt="Wallglass website" class="project-screenshot-img wallglass-img">
+        </div>
+        <div class="other-branding-texts">
+          <div class="service-item">
+            <span class="service-tag" data-i18n="tag.company">Company</span>
+            <p class="about-body">Wallglass</p>
+            <p class="about-body" style="margin-top: 8px;" data-i18n="other.brand.company">Specialist in the design, installation, and maintenance of eco-friendly glass facades for modern, comfortable, and elegant buildings.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-tag" data-i18n="tag.mission">Mission</span>
+            <p class="about-body" data-i18n="other.brand.mission">As part of a digital transformation initiative, I supported Wallglass across brand identity, customer segmentation and UX design — delivering a CMS-built landing page with a tailored experience for each customer segment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Management -->
+    <div class="other-section">
+      <h2 class="project-section-title" style="margin-bottom: 24px;" data-i18n="other.pm.title">Product Management</h2>
+      <div class="project-two-col livinfrance-cols" style="grid-template-columns: 3fr 2fr; align-items: start; gap: 64px;">
+        <div>
+          <img src="assets/img/livinfrance-screenshot.png" alt="LivinFrance" class="project-screenshot-img" style="border-radius: 4px;">
+        </div>
+        <div class="livinfrance-texts">
+          <div class="service-item">
+            <span class="service-tag" data-i18n="tag.company">Company</span>
+            <p class="about-body">LivinFrance</p>
+            <p class="about-body" style="margin-top: 8px;" data-i18n="other.pm.company">Platform that has supported over 40,000 international students settling in France — streamlining every step of the process, from visas and accommodation to banking, health and insurance.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-tag" data-i18n="tag.context">Context</span>
+            <p class="about-body" data-i18n="other.pm.context">As a Product Management consultant, I supported the founders of LivinFrance in defining the product strategy and vision for their client-facing SaaS solution.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-tag" data-i18n="tag.missions">Missions</span>
+            <p class="about-body" style="margin-bottom: 8px;" data-i18n="other.pm.m1">Vision — Challenged the founding team to articulate a clear product vision and translate customer needs into actionable insights</p>
+            <p class="about-body" style="margin-bottom: 8px;" data-i18n="other.pm.m2">MVP — Prioritised and structured the project into EPICs, defining the scope and sequencing of the first product iteration</p>
+            <p class="about-body" data-i18n="other.pm.m3">Delivery — Guided the team through feature specification and testing to support a structured and confident first release</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Speaker -->
+    <div class="other-section">
+      <h2 class="project-section-title" style="margin-bottom: 24px;" data-i18n="other.speaker.title">Speaker about entrepreneurship and product management</h2>
+      <div class="project-two-col other-speaker-cols" style="align-items: start; gap: 64px;">
+        <div>
+          <img src="assets/img/logo-sciencespo-lille1.png" alt="Sciences Po — Université de Lille" class="other-speaker-logo">
+          <div class="service-item" style="margin-top: 32px;">
+            <span class="service-tag" data-i18n="other.speaker.1.t">Speaker about Entrepreneurship</span>
+            <p class="about-body" style="margin-bottom: 16px;" data-i18n="other.speaker.1.d1">Two leading French academic institutions — Sciences Po, renowned for social sciences, and the University of Lille, specialising in science and technology.</p>
+            <p class="about-body" data-i18n="other.speaker.1.d2">Lecturer for Master's students on entrepreneurship — covering company creation and freelancing, from first steps to legal setup.</p>
+          </div>
+        </div>
+        <div>
+          <img src="assets/img/logo-dc.png" alt="Digital Campus Paris" class="other-speaker-logo">
+          <div class="service-item" style="margin-top: 32px;">
+            <span class="service-tag" data-i18n="other.speaker.2.t">Speaker about Entrepreneurship &amp; Product Management</span>
+            <p class="about-body" style="margin-bottom: 16px;" data-i18n="other.speaker.2.d1">Digital Campus is a French digital school offering Bachelor's and Master's degrees in web and digital professions, from post-baccalaureate to professional development.</p>
+            <p class="about-body" data-i18n="other.speaker.2.d2">Jury member for Master's students' final diploma exams, evaluating comprehensive business plans developed throughout the year.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-nav-bottom">
+      <div class="project-nav-item">
+        <img src="assets/img/logo-leadscore.png" class="nav-logo-img" alt="Leadscore.io">
+        <div class="nav-dates">2018</div>
+        <div class="nav-role" data-i18n="role.leadscore">Product Manager &amp; UX Designer at Leadscore</div>
+        <span class="project-cta" onclick="showProject('leadscore')" data-i18n="btn.discover">Discover</span>
+      </div>
+      <div class="project-nav-item nav-next">
+        <div class="nav-company-name" data-i18n="nav.home">Home</div>
+        <span class="project-cta" onclick="showPage('home')" data-i18n="btn.back">Back</span>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-info">Sofiane Achab<br>Copyright © 2026<br>sofiane.achab@gmail.com<br>(33) 6 83 82 72 22</div>
+      <a href="https://www.linkedin.com/in/sofianeachab/" class="footer-link" target="_blank">LinkedIn ↗</a>
+    </footer>
+  </div>
+
+  <script>
+    // ── Navigation state ──
+    const pages = ['home', 'about'];
+    const projects = ['loreal', 'osme', 'partoo', 'leadscore', 'other'];
+
+    // ════════ i18n ════════
+    const i18n = {
+      'nav.home': { en: 'Home', fr: 'Accueil' },
+      'nav.about': { en: 'About', fr: 'À propos' },
+      'btn.discover': { en: 'Discover', fr: 'Découvrir' },
+
+      // ── HOME ──
+      'home.tagline': {
+        en: "From detecting user needs to designing solutions and driving technical teams — I turn complex problems into coherent, impactful digital products or process.",
+        fr: "De la détection des besoins utilisateurs à la conception de solutions, en passant par le pilotage d'équipes techniques. Je transforme des problèmes complexes en produits et processus numériques cohérents et à fort impact."
+      },
+      'home.headline': {
+        en: "Hello, I'm Sofiane — Senior Product Manager & UX Designer helping companies navigate digital transformation through product strategy, design and agile methodology.",
+        fr: "Bonjour, je suis Sofiane. Senior Product Manager & UX Designer, j'accompagne les entreprises dans leur transformation digitale à travers la stratégie produit, le design et les méthodes agiles."
+      },
+      'home.intro': {
+        en: "Here's a selection of my projects and work experiences.",
+        fr: "Voici une sélection de mes projets et expériences professionnelles."
+      },
+      'cat.loreal': { en: 'UX/UI Design &amp; Product Management', fr: 'Design UX/UI &amp; Product Management' },
+      'cat.osme': { en: 'Entrepreneurship', fr: 'Entrepreneuriat' },
+      'cat.partoo': { en: 'Product Management', fr: 'Product Management' },
+      'cat.leadscore': { en: 'Product Design', fr: 'Product Design' },
+      'cat.wallglass': { en: 'Branding &amp; UX/UI Design', fr: 'Branding &amp; Design UX/UI' },
+      'cat.livinfrance': { en: 'Product Management', fr: 'Product Management' },
+      'cat.other': { en: 'Product, Lecturer, UX Research', fr: 'Produit, Enseignant, UX Research' },
+      'proj.other.name': { en: 'Other projects…', fr: 'Autres projets…' },
+
+      // ── ABOUT ──
+      'about.heading': { en: 'About', fr: 'À propos' },
+      'about.body': {
+        en: "From detecting user needs to designing solutions and driving technical teams — I bridge strategy, design and execution to build digital products that create real value.",
+        fr: "De la détection des besoins utilisateurs à la conception de solutions, en passant par le pilotage d'équipes techniques — je relie stratégie, design et exécution pour bâtir des produits numériques qui créent une réelle valeur."
+      },
+      'about.svc.pm': {
+        en: "Translating user needs into clear product decisions — defining solutions, aligning stakeholders, and leading technical teams from discovery through delivery.",
+        fr: "Traduire les besoins utilisateurs en décisions produit claires : définir les solutions, aligner les parties prenantes et piloter les équipes techniques, de l'exploration à la livraison, en passant par la communication et la formation des équipes internes."
+      },
+      'about.svc.ux': {
+        en: "Designing intuitive, user-centred experiences that balance real user needs with business objectives — from research and analysis to wireframes and final product.",
+        fr: "Concevoir des expériences intuitives et centrées utilisateur, alliant besoins réels et objectifs business : de la recherche et l'analyse jusqu'aux wireframes et au produit final."
+      },
+      'about.svc.ent': {
+        en: "End-to-end support for intra- and entrepreneurial projects — from need validation and vision definition to MVP scoping, branding and landing page creation.",
+        fr: "Un accompagnement de bout en bout pour les projets intra- et entrepreneuriaux : de la validation du besoin et la définition de la vision au cadrage du MVP, au branding et à la création de landing pages."
+      },
+      'tag.entrepreneurship': { en: 'Entrepreneurship', fr: 'Entrepreneuriat' },
+      'btn.contact': { en: 'Contact me', fr: 'Me contacter' },
+      'role.osme': { en: 'Founder at Osme', fr: 'Fondateur d\'Osme' },
+      'role.loreal': { en: 'Senior UX.UI Designer &amp; Product Manager at L\'Oréal', fr: 'Senior UX.UI Designer &amp; Product Manager chez L\'Oréal' },
+      'role.partoo': { en: 'Senior Product Manager at Partoo', fr: 'Senior Product Manager chez Partoo' },
+      'role.leadscore': { en: 'Product Manager &amp; UX Designer at Leadscore', fr: 'Product Manager &amp; UX Designer chez Leadscore' },
+      'role.other': { en: 'Product, Lecturer, UX Research', fr: 'Produit, Enseignant, UX Research' },
+
+      // ── L'ORÉAL ──
+      'loreal.title': { en: "L'Oréal as Senior UX.UI Designer &amp; Product Manager", fr: "L'Oréal en tant que Senior UX.UI Designer &amp; Product Manager" },
+      'loreal.intro': {
+        en: "For 2 years at L'Oréal Research &amp; Innovation (R&amp;I), I led end-to-end digital transformation projects across laboratories — from user research and product design to cross-team alignment — while establishing a shared UX &amp; Agile methodology now adopted across the organization.",
+        fr: "Pendant 2 ans au sein de L'Oréal Research &amp; Innovation (R&amp;I), j'ai piloté des projets de transformation digitale de bout en bout à travers les laboratoires : de la recherche utilisateur et du design produit à l'alignement inter-équipes, tout en établissant une méthodologie UX &amp; Agile commune, désormais adoptée dans toute l'organisation."
+      },
+      'loreal.confidential': {
+        en: "As this project is covered by a confidentiality agreement, I'm unable to display any screenshots or visuals — feel free to reach out if you'd like to discuss it further.",
+        fr: "Ce projet étant couvert par un accord de confidentialité, je ne peux afficher aucune capture d'écran ni visuel. N'hésitez pas à me contacter si vous souhaitez en discuter."
+      },
+      'loreal.resp.title': { en: 'Responsibilities', fr: 'Responsabilités' },
+      'loreal.resp.1.t': { en: 'End-to-end UX Framing', fr: 'Cadrage UX de bout en bout' },
+      'loreal.resp.1.d': { en: 'Led projects from problem definition and user research through to wireframing, prototyping and user testing.', fr: 'Piloter des projets de la définition du problème et la recherche utilisateur jusqu\'au wireframing, au prototypage et aux tests utilisateurs.' },
+      'loreal.resp.2.t': { en: 'Methodology design', fr: 'Conception de méthodologie' },
+      'loreal.resp.2.d': { en: 'Established a common UX &amp; Agile framework adopted by all Research &amp; Innovation teams as the standard way of working.', fr: 'Établir un cadre commun UX &amp; Agile adopté par toutes les équipes Research &amp; Innovation comme standard de travail.' },
+      'loreal.resp.3.t': { en: 'User-centred strategy', fr: 'Stratégie centrée utilisateur' },
+      'loreal.resp.3.d': { en: 'In an organisation where direction was largely top-down, I advocated for and successfully embedded a "Problem → Solution" approach — introducing user research tools and field studies to shift decision-making toward real user needs and pain points.', fr: 'Dans une organisation largement descendante, j\'ai défendu et ancré avec succès une approche « Problème → Solution », en introduisant des outils de recherche utilisateur et des études terrain pour orienter les décisions vers les besoins et les points de friction réels des utilisateurs.' },
+      'loreal.resp.4.t': { en: 'Product management', fr: 'Gestion de produit' },
+      'loreal.resp.4.d': { en: 'Acted as both UX Designer and Product Manager, driving digital transformation initiatives across R&amp;I laboratories.', fr: 'Occuper à la fois les rôles d\'UX Designer et de Product Manager, en menant les initiatives de transformation digitale à travers les laboratoires R&amp;I.' },
+      'loreal.resp.5.t': { en: 'Stakeholder alignment', fr: 'Alignement des parties prenantes' },
+      'loreal.resp.5.d': { en: 'Coordinated cross-functional teams including Product Owners, architects, product leads and lab users around a shared product vision.', fr: 'Coordonner des équipes pluridisciplinaires : Product Owners, architectes, responsables produit et utilisateurs des laboratoires, autour d\'une vision produit commune.' },
+      'loreal.ach.title': { en: 'Some achievements', fr: 'Quelques réalisations' },
+      'loreal.ach.1.t': { en: 'UX &amp; Agile Framing Process', fr: 'Processus de cadrage UX &amp; Agile' },
+      'loreal.ach.1.d': { en: 'Designed and deployed a shared methodology across both UX and Agile chapters, built around a "Problem → Solution" philosophy. Now adopted organisation-wide and used as a foundation for all R&amp;I projects.', fr: 'Concevoir et déployer une méthodologie commune aux chapitres UX et Agile, articulée autour d\'une philosophie « Problème → Solution ». Désormais adoptée à l\'échelle de l\'organisation et utilisée comme socle pour tous les projets R&amp;I.' },
+      'loreal.ach.2.t': { en: 'Business Processes As IS', fr: 'Cartographie des processus métier' },
+      'loreal.ach.2.d': { en: 'Mapped the end-to-end business processes of all R&amp;I laboratories in under 2 months, creating a shared reference used by multiple teams during their exploration phases.', fr: 'Cartographier les processus métier de bout en bout de tous les laboratoires R&amp;I en moins de 2 mois, créant une référence commune utilisée par plusieurs équipes lors de leurs phases d\'exploration et de développement.' },
+      'loreal.ach.3.t': { en: 'UX Exploration Foundation', fr: 'Socle d\'exploration UX' },
+      'loreal.ach.3.d': { en: "During my first months at L'Oréal, I led an end-to-end UX exploration on a pilot laboratory, which became the foundation for advocating a user-centred strategy across the entire R&amp;I division.", fr: "Dès mes premiers mois chez L'Oréal, j'ai mené une exploration UX de bout en bout sur un laboratoire pilote, qui est devenue le socle pour défendre une stratégie centrée utilisateur dans toute la division R&amp;I." },
+      'loreal.ach.4.t': { en: 'OKR &amp; Complexity Matrix', fr: 'OKR &amp; matrice de complexité' },
+      'loreal.ach.4.d': { en: 'Designed a framing framework to give project teams better visibility on problem knowledge and solution needs, while helping PMOs strengthen project sponsorship and enabling Product Managers to define sharper framing strategies.', fr: 'Concevoir un cadre de cadrage offrant aux équipes une meilleure visibilité sur la connaissance du problème et les besoins de solution, tout en aidant les PMO à renforcer le sponsoring des projets et en permettant aux Product Managers de définir des stratégies de cadrage plus précises.' },
+      'loreal.ach.5.t': { en: 'Design system', fr: 'Design system' },
+      'loreal.ach.5.d': { en: 'Integration of a new design system (Graphic chart, icons, buttons, atomic &amp; molecular levels).', fr: 'Intégration d\'un nouveau design system (charte graphique, icônes, boutons, niveaux atomiques &amp; moléculaires).' },
+      'loreal.sp.title': { en: 'Some projects', fr: 'Quelques projets' },
+      'loreal.sp.1.t': { en: "Traceability test tool for all L'Oréal Labs", fr: "Outil de test de traçabilité pour tous les labos L'Oréal" },
+      'loreal.sp.1.d': { en: "Led the end-to-end design of a critical cross-laboratory tool, from UX exploration and framing through wireframes, A/B testing and prototyping, to the integration of a new design system. The tool serves as the data foundation for L'Oréal R&amp;I's broader AI strategy, while tackling one of its core UX challenges: making a highly constrained and complex user task as simple and intuitive as possible.", fr: "Piloter la conception de bout en bout d'un outil inter-laboratoires critique, de l'exploration et du cadrage UX aux wireframes, tests A/B et prototypage, jusqu'à l'intégration d'un nouveau design system. L'outil constitue le socle de données de la stratégie IA plus large de L'Oréal R&amp;I, tout en relevant l'un de ses défis UX majeurs : rendre une tâche utilisateur très contrainte et complexe aussi simple et intuitive que possible." },
+      'loreal.sp.2.t': { en: "Monitoring tool for all L'Oréal labs with AI features", fr: "Outil de suivi pour tous les labos L'Oréal avec fonctionnalités IA" },
+      'loreal.sp.2.d': { en: "Took over a repeatedly deprioritised project, conducted a full audit of a chaotic existing base, then led an end-to-end reframing — from user research to prototype — navigating the complexity of data, algorithms and the diversity of lab monitoring practices.", fr: "Reprendre un projet régulièrement dépriorisé, mené un audit complet d'une base existante chaotique, puis piloté un recadrage de bout en bout : de la recherche utilisateur au prototype, en composant avec la complexité des données, des algorithmes et la diversité des pratiques de suivi des laboratoires." },
+      'loreal.sp.3.t': { en: 'Communication tool between labs &amp; Marketing teams', fr: 'Outil de communication entre labos &amp; équipes Marketing' },
+      'loreal.sp.3.d': { en: "Bridged two distinct data entities within L'Oréal by designing a simple UX within ERP constraints, leading the process from an initial audit through user interviews to user testing campaigns.", fr: "Relier deux entités de données distinctes au sein de L'Oréal en concevant une UX simple dans le cadre des contraintes ERP, en pilotant le processus d'un audit initial aux entretiens utilisateurs jusqu'aux campagnes de tests utilisateurs." },
+      'loreal.sp.4.t': { en: 'AI tool for innovation labs', fr: 'Outil IA pour les laboratoires d\'innovation' },
+      'loreal.sp.4.d': { en: "Supported BCG teams as a UX expert in designing the product strategy for a generative AI tool aimed at L'Oréal's advanced research laboratory teams.", fr: "Accompagner les équipes BCG en tant qu'expert UX dans la définition de la stratégie produit d'un outil d'IA générative destiné aux équipes des laboratoires de recherche avancée de L'Oréal." },
+      'loreal.sp.5.t': { en: 'Monitoring tool for a specific type of laboratory', fr: 'Outil de suivi pour un type de laboratoire spécifique' },
+      'loreal.sp.5.d': { en: 'Supported a highly specific laboratory in defining a simple ERP-based tool, leading the process from audit to full product strategy definition.', fr: 'Accompagner un laboratoire très spécifique dans la définition d\'un outil simple basé sur l\'ERP, en pilotant le processus de l\'audit à la définition complète de la stratégie produit.' },
+
+      // ── OSME ──
+      'osme.title': { en: 'Osme as Founder', fr: 'Osme en tant que Fondateur' },
+      'osme.intro': {
+        en: "Osme offers an ethical and creative alternative in fashion by supporting emerging fashion designers in the development of their brand. This is done through a digital platform and pop-up concept stores.",
+        fr: "Osme propose une alternative éthique et créative dans la mode en accompagnant les créateurs émergents dans le développement de leur marque, à travers une plateforme digitale et des concept stores éphémères."
+      },
+      'osme.dev.title': { en: 'Design &amp; osme.fr platform development', fr: 'Design &amp; développement de la plateforme osme.fr' },
+      'osme.dev.1': {
+        en: "User research, creation of a concept diverging from traditional e-commerce norms to suit a specific product in the fashion industry. Prototyping, segmentation to define an MVP, and platform development.",
+        fr: "Mener la recherche utilisateur, créer un concept s'écartant des codes traditionnels de l'e-commerce pour s'adapter à un produit spécifique du secteur de la mode. Prototyper, segmenter pour définir un MVP, et développer la plateforme."
+      },
+      'osme.dev.2': {
+        en: "The concept: applying the principles of art to fashion to emphasize the creative process and craftsmanship that lie behind a designer's piece.",
+        fr: "Le concept : appliquer les principes de l'art à la mode pour mettre en valeur le processus créatif et le savoir-faire qui se cachent derrière la pièce d'un créateur."
+      },
+      'osme.label.landing': { en: 'The landing page', fr: 'La landing page' },
+      'osme.caption.landing': {
+        en: "A phygital experience bridging the gap between the Osme platform and the concept store.",
+        fr: "Une expérience phygitale qui relie la plateforme Osme et le concept store."
+      },
+      'osme.label.home': { en: 'The home page', fr: "La page d'accueil" },
+      'osme.caption.home': { en: 'A fresh perspective on e-commerce.', fr: "Un regard neuf sur l'e-commerce." },
+      'osme.know.title': { en: 'To know more about Osme…', fr: 'Pour en savoir plus sur Osme…' },
+      'osme.vision.t': { en: 'The vision', fr: 'La vision' },
+      'osme.vision.d': {
+        en: "The price of a piece should be justified by the craftsmanship and creativity of the designer, not by the brand's reputation. A new shopping experience should be offered by encouraging the customer to engage with the story and craftsmanship behind the piece.",
+        fr: "Le prix d'une pièce devrait être justifié par le savoir-faire et la créativité du créateur, et non par la réputation de la marque. Offrir une nouvelle expérience d'achat en encourageant le client à s'intéresser à l'histoire et au savoir-faire qui se cachent derrière la pièce."
+      },
+      'osme.solutions.t': { en: 'The solutions', fr: 'Les solutions' },
+      'osme.solutions.d': {
+        en: "An e-commerce platform alone is not enough to convey the artistic sensitivity and craftsmanship of the designers.",
+        fr: "Une plateforme e-commerce seule ne suffit pas à transmettre la sensibilité artistique et le savoir-faire des créateurs."
+      },
+      'osme.solutions.stats': { en: '1 digital marketplace ; 4 concept-stores ; 70+ brands', fr: '1 marketplace digitale ; 4 concept stores ; plus de 70 marques' },
+      'osme.mkt.t': { en: 'The marketplace', fr: 'La marketplace' },
+      'osme.mkt.d': {
+        en: "Provide a digital presence for designers, with a space that goes beyond just purchasing and an online store, but also includes a discovery area to enhance the customer experience.",
+        fr: "Offrir une présence digitale aux créateurs, avec un espace qui va au-delà du simple achat et de la boutique en ligne, en intégrant aussi une zone de découverte pour enrichir l'expérience client."
+      },
+      'osme.cs.t': { en: 'The concept-store', fr: 'Le concept store' },
+      'osme.cs.d': {
+        en: "Create a space to exhibit designer pieces. A meeting place where consumers and designers can engage in discussions about craftsmanship and shared values.",
+        fr: "Créer un espace pour exposer les pièces des créateurs. Un lieu de rencontre où consommateurs et créateurs peuvent échanger autour du savoir-faire et de valeurs partagées."
+      },
+
+      // ── PARTOO ──
+      'partoo.title': { en: 'Partoo as Senior Product Manager', fr: 'Partoo en tant que Senior Product Manager' },
+      'partoo.intro': {
+        en: "For over 2 years at Partoo, I owned the Review Management product end-to-end — leading 20+ projects from user research to launch, managing a cross-functional team of 9. I built and scaled a reputation management tool integrated with Google, Facebook &amp; TripAdvisor, designed for non-digital-native users such as local merchants and craftsmen. I also co-led a full UX/UI redesign of the entire platform, across both desktop and mobile.",
+        fr: "Pendant plus de 2 ans chez Partoo, j'ai géré le produit Review Management de bout en bout, en pilotant plus de 20 projets de la recherche utilisateur au lancement et en encadrant une équipe pluridisciplinaire de 9 personnes. J'ai conçu et fait monter en charge un outil de gestion de la e-réputation intégré à Google, Facebook &amp; TripAdvisor, pensé pour des utilisateurs peu familiers du numérique comme les commerçants et artisans locaux. J'ai également co-piloté la refonte UX/UI complète de la plateforme, sur desktop comme sur mobile."
+      },
+      'partoo.about.1': {
+        en: "Partoo is a scale-up providing a SaaS product to help local businesses enhance their digital presence, e-reputation, and direct interaction with customers and visitors.",
+        fr: "Partoo est une scale-up qui propose un produit SaaS pour aider les commerces locaux à renforcer leur présence digitale, leur e-réputation et leur interaction directe avec leurs clients et visiteurs."
+      },
+      'partoo.about.2': { en: 'Partoo had 2 flagship products: Presence &amp; Review Management.', fr: 'Partoo comptait 2 produits phares : Presence &amp; Review Management.' },
+      'partoo.about.3': {
+        en: "For over 2 years, I held the position of Product Manager for Review Management, which assists clients in managing their online reputation.",
+        fr: "Pendant plus de 2 ans, j'ai occupé le poste de Product Manager du produit Review Management, qui aide les clients à gérer leur réputation en ligne."
+      },
+      'partoo.epics.1': { en: '20+ projets (EPICs)', fr: 'Plus de 20 projets (EPICs)' },
+      'partoo.epics.2': { en: 'explored, specified, delivered, tested, and communicated', fr: 'explorés, spécifiés, livrés, testés et communiqués' },
+      'partoo.box.expl.1': { en: 'User research', fr: 'Recherche utilisateur' },
+      'partoo.box.expl.2': { en: 'A.B testing', fr: 'Tests A/B' },
+      'partoo.box.mgmt.title': { en: 'Management', fr: 'Pilotage' },
+      'partoo.box.mgmt.1': { en: 'UX strategy &amp; roadmap', fr: 'Stratégie UX &amp; roadmap' },
+      'partoo.box.mgmt.2': { en: 'Prioritization (RICE) &amp; Specification', fr: 'Priorisation (RICE) &amp; spécification' },
+      'partoo.box.mgmt.3': { en: 'Manage cross functionnal team (9 ppl)', fr: 'Encadrement d\'une équipe pluridisciplinaire (9 pers.)' },
+      'partoo.box.launch.title': { en: 'Launch', fr: 'Lancement' },
+      'partoo.box.launch.1': { en: 'Q&amp;A, test strategy', fr: 'Q&amp;A, stratégie de test' },
+      'partoo.box.launch.2': { en: 'Product Marketing', fr: 'Product Marketing' },
+      'partoo.box.launch.3': { en: 'Internal &amp; external communication', fr: 'Communication interne &amp; externe' },
+      'partoo.box.launch.4': { en: 'Internal training', fr: 'Formation interne' },
+      'partoo.feat.title': { en: 'Features &amp; projects highlights:', fr: 'Fonctionnalités &amp; faits marquants :' },
+      'partoo.feat.1': { en: 'Fetching and responding to Google, Facebook &amp; TripAdvisor reviews via API', fr: 'Récupération et réponse aux avis Google, Facebook &amp; TripAdvisor via API' },
+      'partoo.feat.2': { en: 'Filtering by date, platform, rating, comments, keywords…', fr: 'Filtrage par date, plateforme, note, commentaires, mots-clés…' },
+      'partoo.feat.3': { en: 'Seamless user experience despite the differences between Google and Facebook APIs', fr: 'Expérience fluide malgré les différences entre les API Google et Facebook' },
+      'partoo.feat.4': { en: 'Analytics dashboard to track and monitor online reputation', fr: 'Tableau de bord analytique pour suivre et surveiller la réputation en ligne' },
+      'partoo.feat.5': { en: 'Business Intelligence: identifying areas for improvement through review analysis', fr: 'Business Intelligence : identification des axes d\'amélioration via l\'analyse des avis' },
+      'partoo.feat.6': { en: 'Smart response templates', fr: 'Modèles de réponse intelligents' },
+      'partoo.feat.7': { en: 'Review export', fr: 'Export des avis' },
+      'partoo.feat.8': { en: 'Full redesign of the mobile design and user experience', fr: 'Refonte complète du design et de l\'expérience mobile' },
+      'partoo.overhaul.title': { en: 'Complete overhaul of the platform, focusing on UX and UI', fr: 'Refonte complète de la plateforme, axée sur l\'UX et l\'UI' },
+      'partoo.overhaul.body': {
+        en: "Create a new identity, rethink product branding, and enhance the user experience to unify different sections of the tool in terms of customer journey and design components. Lastly, develop the entire mobile experience, including a responsive version that doesn't currently exist.",
+        fr: "Créer une nouvelle identité, repenser le branding produit et améliorer l'expérience utilisateur pour unifier les différentes sections de l'outil, tant sur le parcours client que sur les composants de design. Enfin, développer toute l'expérience mobile, y compris une version responsive qui n'existait pas jusqu'alors."
+      },
+
+      // ── LEADSCORE ──
+      'nav.otherprojects': { en: 'Other projects', fr: 'Autres projets' },
+      'leadscore.title': { en: 'Leadscore as Product Manager &amp; UX Designer', fr: 'Leadscore en tant que Product Manager &amp; UX Designer' },
+      'leadscore.intro': {
+        en: "As Product Designer &amp; Product Manager at Interact, I owned the end-to-end design and delivery of Leadscore.io — a white-label CRM built for sales teams. From UX research and product design to prototyping, product ownership and go-to-market strategy, I worked closely with the CEO to shape the full product experience across marketing, sales and CRM features.",
+        fr: "En tant que Product Designer &amp; Product Manager chez Interact, j'ai piloté la conception et la livraison de bout en bout de Leadscore.io, un CRM en marque blanche destiné aux équipes commerciales. De la recherche UX et du design produit au prototypage, à l'ownership produit et à la stratégie de mise sur le marché, j'ai travaillé en étroite collaboration avec le CEO pour façonner l'ensemble de l'expérience produit, sur les volets marketing, vente et CRM."
+      },
+      'leadscore.company': {
+        en: "Interact is a digital product studio building custom white-label products — CRMs, platforms and mobile apps. As part of a commercial initiative, Interact developed its own CRM, Leadscore.io, designed for sales teams.",
+        fr: "Interact est un studio de produits digitaux qui conçoit des produits sur mesure en marque blanche : CRM, plateformes et applications mobiles. Dans le cadre d'une initiative commerciale, Interact a développé son propre CRM, Leadscore.io, pensé pour les équipes commerciales."
+      },
+      'leadscore.ux.1': { en: 'Full redesign of the CRM from scratch. Rethinking the entire user experience and visual design', fr: 'Refondre intégralement le CRM en repensant toute l\'expérience utilisateur et le design visuel' },
+      'leadscore.ux.2': { en: 'Designed two distinct interfaces and experiences: Admin view and User view', fr: 'Concevoir deux interfaces et expériences distinctes : vue Admin et vue Utilisateur' },
+      'leadscore.ux.3': { en: 'Created the onboarding funnel to guide new users through their first steps on the app', fr: 'Créer le tunnel d\'onboarding pour guider les nouveaux utilisateurs dans leurs premiers pas sur l\'application' },
+      'leadscore.pm.1': { en: 'Owned the product end-to-end from exploration to technical delivery', fr: 'Gérer le produit de bout en bout, de l\'exploration à la livraison technique' },
+      'leadscore.pm.2': { en: 'Conducted UX research and competitive benchmarking to define the CRM strategy', fr: 'Mener la recherche UX et le benchmark concurrentiel pour définir la stratégie du CRM' },
+      'leadscore.pm.3': { en: 'Wrote the specification, managed delivery and led user testing sessions', fr: 'Rédiger les spécifications, piloter la livraison et animer les sessions de tests utilisateurs' },
+      'leadscore.pm.4': { en: 'Defined and prioritised features across 3 core modules: Marketing, Sales and CRM', fr: 'Définir et prioriser les fonctionnalités sur 3 modules clés : Marketing, Vente et CRM' },
+      'leadscore.feat.tag': { en: 'Features &amp; user experience', fr: 'Fonctionnalités &amp; expérience utilisateur' },
+      'leadscore.feat.1': { en: 'Designed the full CRM feature set covering the entire sales workflow', fr: 'Concevoir l\'ensemble des fonctionnalités du CRM couvrant tout le workflow commercial' },
+      'leadscore.feat.2': { en: 'Built a dedicated Admin back office for configuration and management', fr: 'Construire un back-office Admin dédié à la configuration et à la gestion' },
+      'leadscore.feat.3': { en: 'Created a seamless onboarding funnel to reduce friction for new users', fr: 'Créer un tunnel d\'onboarding fluide pour réduire la friction des nouveaux utilisateurs' },
+      'leadscore.feat.4': { en: 'Ensured a consistent yet tailored experience across both Admin and User roles', fr: 'Garantir une expérience cohérente et adaptée à la fois aux rôles Admin et Utilisateur' },
+      'leadscore.mkt.1': { en: 'Defined the communication strategy to present new features and product updates', fr: 'Définir la stratégie de communication pour présenter les nouvelles fonctionnalités et mises à jour produit' },
+      'leadscore.mkt.2': { en: 'Created content to support the product launch and feature releases of Leadscore.io', fr: 'Créer du contenu pour accompagner le lancement produit et les sorties de fonctionnalités de Leadscore.io' },
+      'leadscore.mkt.3': { en: 'Designed and prototyped the Leadscore.io landing page', fr: 'Concevoir et prototyper la landing page de Leadscore.io' },
+
+      // ── OTHER PROJECTS ──
+      'btn.back': { en: 'Back', fr: 'Retour' },
+      'tag.company': { en: 'Company', fr: 'Entreprise' },
+      'tag.mission': { en: 'Mission', fr: 'Mission' },
+      'tag.context': { en: 'Context', fr: 'Contexte' },
+      'tag.missions': { en: 'Missions', fr: 'Missions' },
+      'other.title': { en: 'Other projects', fr: 'Autres projets' },
+      'other.intro': {
+        en: "Beyond my main missions, I have taken on a variety of projects and roles — from supporting companies in their digital transformation and product strategy, to sharing my expertise as a guest lecturer and jury member in entrepreneurship programs at leading French universities and schools.",
+        fr: "Au-delà de mes missions principales, j'ai mené une variété de projets et de rôles : de l'accompagnement d'entreprises dans leur transformation digitale et leur stratégie produit, au partage de mon expertise en tant qu'intervenant et membre de jury dans des programmes d'entrepreneuriat de grandes universités et écoles françaises."
+      },
+      'other.brand.title': { en: 'Branding, design &amp; website development', fr: 'Branding, design &amp; développement web' },
+      'other.brand.company': {
+        en: "Specialist in the design, installation, and maintenance of eco-friendly glass facades for modern, comfortable, and elegant buildings.",
+        fr: "Spécialiste de la conception, de l'installation et de la maintenance de façades vitrées écoresponsables pour des bâtiments modernes, confortables et élégants."
+      },
+      'other.brand.mission': {
+        en: "As part of a digital transformation initiative, I supported Wallglass across brand identity, customer segmentation and UX design — delivering a CMS-built landing page with a tailored experience for each customer segment.",
+        fr: "Dans le cadre d'une initiative de transformation digitale, j'ai accompagné Wallglass sur l'identité de marque, la segmentation client et le design UX, en livrant une landing page développée sous CMS avec une expérience adaptée à chaque segment de clientèle."
+      },
+      'other.pm.title': { en: 'Product Management', fr: 'Product Management' },
+      'other.pm.company': {
+        en: "Platform that has supported over 40,000 international students settling in France — streamlining every step of the process, from visas and accommodation to banking, health and insurance.",
+        fr: "Plateforme ayant accompagné plus de 40 000 étudiants internationaux dans leur installation en France, en fluidifiant chaque étape du parcours : des visas et du logement aux services bancaires, à la santé et à l'assurance."
+      },
+      'other.pm.context': {
+        en: "As a Product Management consultant, I supported the founders of LivinFrance in defining the product strategy and vision for their client-facing SaaS solution.",
+        fr: "En tant que consultant Product Management, j'ai accompagné les fondateurs de LivinFrance dans la définition de la stratégie et de la vision produit de leur solution SaaS orientée client."
+      },
+      'other.pm.m1': {
+        en: "Vision — Challenged the founding team to articulate a clear product vision and translate customer needs into actionable insights",
+        fr: "Vision : challenger l'équipe fondatrice pour formuler une vision produit claire et traduire les besoins clients en enseignements actionnables"
+      },
+      'other.pm.m2': {
+        en: "MVP — Prioritised and structured the project into EPICs, defining the scope and sequencing of the first product iteration",
+        fr: "MVP : prioriser et structurer le projet en EPICs, en définissant le périmètre et le séquencement de la première itération produit"
+      },
+      'other.pm.m3': {
+        en: "Delivery — Guided the team through feature specification and testing to support a structured and confident first release",
+        fr: "Livraison : guider l'équipe dans la spécification et le test des fonctionnalités pour assurer une première mise en production structurée et sereine"
+      },
+      'other.speaker.title': { en: 'Speaker about entrepreneurship and product management', fr: "Intervenant en entrepreneuriat et product management" },
+      'other.speaker.1.t': { en: 'Speaker about Entrepreneurship', fr: 'Intervenant en entrepreneuriat' },
+      'other.speaker.1.d1': {
+        en: "Two leading French academic institutions — Sciences Po, renowned for social sciences, and the University of Lille, specialising in science and technology.",
+        fr: "Deux institutions académiques françaises de premier plan : Sciences Po, reconnue pour les sciences sociales, et l'Université de Lille, spécialisée en sciences et technologies."
+      },
+      'other.speaker.1.d2': {
+        en: "Lecturer for Master's students on entrepreneurship — covering company creation and freelancing, from first steps to legal setup.",
+        fr: "Intervenant auprès d'étudiants en Master sur l'entrepreneuriat, couvrant la création d'entreprise et le freelancing, des premiers pas à la mise en place juridique."
+      },
+      'other.speaker.2.t': { en: 'Speaker about Entrepreneurship &amp; Product Management', fr: 'Intervenant en entrepreneuriat &amp; product management' },
+      'other.speaker.2.d1': {
+        en: "Digital Campus is a French digital school offering Bachelor's and Master's degrees in web and digital professions, from post-baccalaureate to professional development.",
+        fr: "Digital Campus est une école française du numérique proposant des diplômes de Bachelor et de Master dans les métiers du web et du digital, du post-bac à la formation continue."
+      },
+      'other.speaker.2.d2': {
+        en: "Jury member for Master's students' final diploma exams, evaluating comprehensive business plans developed throughout the year.",
+        fr: "Membre du jury des examens de fin de diplôme des étudiants en Master, évaluant des business plans complets élaborés tout au long de l'année."
+      }
+    };
+
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const entry = i18n[el.getAttribute('data-i18n')];
+        if (entry && entry[lang] != null) el.innerHTML = entry[lang];
+      });
+      document.querySelectorAll('.lang-opt').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+
+    function hideAll() {
+      document.getElementById('page-home').classList.add('hidden');
+      document.getElementById('page-home').style.display = 'none';
+      document.getElementById('page-about').style.display = 'none';
+      projects.forEach(p => {
+        document.getElementById('project-' + p).classList.remove('active');
+      });
+    }
+
+    function showPage(page) {
+      hideAll();
+      window.scrollTo(0, 0);
+      // update nav
+      document.getElementById('nav-home').classList.toggle('active', page === 'home');
+      document.getElementById('nav-about').classList.toggle('active', page === 'about');
+
+      if (page === 'home') {
+        const el = document.getElementById('page-home');
+        el.style.display = 'block';
+        el.classList.remove('hidden');
+        triggerProjectAnimations();
+      } else if (page === 'about') {
+        document.getElementById('page-about').style.display = 'block';
+      }
+    }
+
+    function showProject(slug) {
+      hideAll();
+      window.scrollTo(0, 0);
+      document.getElementById('nav-home').classList.remove('active');
+      document.getElementById('nav-about').classList.remove('active');
+      const page = document.getElementById('project-' + slug);
+      page.classList.add('active');
+      revealSections(page);
+    }
+
+    // ── Light entrance animation for each project section on scroll ──
+    function revealSections(pageEl) {
+      const blocks = Array.from(pageEl.children).filter(el => el.tagName !== 'FOOTER');
+      blocks.forEach(b => {
+        b.classList.add('reveal');
+        b.classList.remove('revealed');
+      });
+
+      function check() {
+        const trigger = window.innerHeight * 0.9;
+        let remaining = false;
+        blocks.forEach(b => {
+          if (b.classList.contains('revealed')) return;
+          if (b.getBoundingClientRect().top < trigger) {
+            b.classList.add('revealed');
+          } else {
+            remaining = true;
+          }
+        });
+        if (!remaining) {
+          window.removeEventListener('scroll', check);
+          pageEl._revealHandler = null;
+        }
+      }
+
+      if (pageEl._revealHandler) window.removeEventListener('scroll', pageEl._revealHandler);
+      pageEl._revealHandler = check;
+      window.addEventListener('scroll', check, { passive: true });
+      // let the .reveal (opacity 0) paint once, then reveal in-view blocks so the transition plays
+      requestAnimationFrame(() => requestAnimationFrame(check));
+      setTimeout(check, 120);
+    }
+
+    // ── Scroll animation for project items ──
+    function triggerProjectAnimations() {
+      const items = document.querySelectorAll('.project-item');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px 200px 0px' });
+      items.forEach(item => observer.observe(item));
+    }
+
+    // ── Nav scroll border ──
+    window.addEventListener('scroll', () => {
+      document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ── Init ──
+    triggerProjectAnimations();
+    (function initLang() {
+      let saved = 'en';
+      try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+      setLang(saved);
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# Outils de prévisualisation locale (inutiles en ligne)
+.claude/
+serve.py
