@@ -2,7 +2,7 @@
 
 Personal portfolio of **Sofiane Achab**, Senior Product Manager & UX Designer.
 
-🔗 **Live site:** _coming soon_ <!-- Replace with your URL once Pages is live, e.g. https://sofianeachab.github.io -->
+🔗 **Live site:** [sofachab.github.io](https://sofachab.github.io)
 
 ## Overview
 
